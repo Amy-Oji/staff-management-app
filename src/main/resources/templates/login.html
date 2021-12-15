@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    html{
+        font-size: 62.5%;
+    }
+    body{
+        height: 100vh;
+        background-color: beige;
+        box-sizing: border-box;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+    }
+    .login-page{
+        display: grid;
+        grid-template-columns: auto auto;
+        /* flex-direction: row; */
+        justify-content: space-between;
+        align-items: center;
+    }
+    h1{
+        font-size: 50px;
+        color: rgb(44, 125, 231);
+        text-transform: uppercase;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    h3{
+        font-size: 2.3rem;
+        text-transform: uppercase;
+        color: rgb(54, 202, 228);
+    }
+    .login-image, .login-section{
+        width:  100px;
+        object-fit: contain;
+        margin: 20px;
+    }
+    .login-section{
+        margin-left: 20px;
+    }
+    .input-field{
+        display: block;
+        margin: 20px 0;
+        width: 400px;
+        padding: 10px;
+        font-size: 17px;
+        border-radius: 15px;
+        border: none;
+    }
+    input[type="submit"]{
+        background-color: rgb(54, 202, 228);
+        text-transform: capitalize;
+        color: #fff;
+        font-size: 2rem;
+    }
+    input[type="submit"]:active{
+        position: relative;
+        top: 2px;
+    }
+    p{
+        font-size: 1.5rem;
+    }
+    .forget_password{
+        margin-top: 4rem;
+        width: 300px;
+    }
+</style>
+<body>
+<h1>Welcome Esteemed Staff</h1>
+<div class="login-page">
+    <div class="login-image"><img th:src="@{login.png}" alt=""></div>
+    <div class="login-section">
+        <form action="" th:action="@{/login}" method="post" th:object="${staff}">
+            <h3>login</h3>
+            <input type="email" class="input-field" id="email" th:field="*{email}" placeholder="Email Address" required>
+            <input type="password" class="input-field" id="password" th:field="*{password}" placeholder="Password" required>
+            <input type="submit" class="input-field" value="submit">
+        </form>
+        <div class="forget_password">
+            <h3>Forget Password</h3>
+            <p>Contact Admin</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

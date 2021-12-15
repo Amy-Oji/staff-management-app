@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management System</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    html{
+        font-size: 62.5%;
+    }
+    body{
+        height: 100vh;
+        background-color: beige;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .staff_details{
+        margin: 0 auto;
+        width: 80%;
+        height: 400px;
+        background-color: rgb(6, 108, 175);
+        padding: 20px;
+        position: relative;
+        display: flex;
+        border-radius: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .staff{
+        margin-top: 50px;
+        margin-left: 200px;
+    }
+    .staff h2{
+        color: antiquewhite;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-size: 3rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        margin-bottom: 20px;
+    }
+    .staff li{
+        text-decoration: none;
+        text-transform: uppercase;
+        list-style: none;
+        padding: 5px;
+        font-size: 1.7rem;
+        color: #ddd;
+    }
+    .staff_image{
+        background-image: url('login.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        border: 2px solid rgb(6, 108, 175);
+        box-shadow: 2px 3px 5px rgb(6, 108, 175);
+        position: absolute;
+        left: -100px;
+        top: 130px;
+        object-fit: cover;
+    }
+    nav{
+        text-align: left;
+        width: 50%;
+        position: absolute;
+        bottom: 150px;
+        right: 10px;
+    }
+    nav li{
+        display: inline-block;
+        background-color: #333;
+        padding: 5px;
+        color: #fff;
+        font-size: 1.3rem;
+        margin: 5px 10px;
+        border-radius: 5px;
+        outline: 2px solid #333;
+        outline-offset: 2px;
+        cursor: pointer;
+    }
+    .staff li span{
+        text-transform: lowercase;
+        display: inline-block;
+        margin-left: 1rem;
+        /*border: 1px solid #fff;*/
+        /*border-radius: 1rem;*/
+        padding: 0.5rem;
+    }
+    nav li a{
+        text-decoration: none;
+        color: #fff;
+    }
+    nav li:hover{
+        background-color: #000;
+        outline: 2px solid #000;
+    }
+    nav li:active{
+        position: relative;
+        top: 5px;
+    }
+</style>
+<body>
+<div class="content">
+    <div class="staff_details">
+        <div class="staff">
+            <h2 th:text="${loggerUser.firstName + ' ' + loggerUser.lastName}"></h2>
+            <ul>
+                <li>Employee ID : <span th:text="${loggerUser.staffId}"></span></li>
+                <li>Email : <span th:text="${loggerUser.email}"></span></li>
+                <li>Phone Number : <span th:text="${loggerUser.phoneNumber}"></span></li>
+                <li>Role : <span th:text="${loggerUser.role}"></span></li>
+                <li>Gender : <span th:text="${loggerUser.gender}"></span></li>
+            </ul>
+        </div>
+        <div class="staff_image"><img th:src="@{login.png}" alt=""></div>
+    </div>
+    <nav th:if="${role==true}">
+        <ul>
+            <li><a th:href = "@{/showNewStaffForm}"> Add New Staff</a></li>
+            <li><a th:href = "@{/home}"> View List of Staff</a></li>
+            <li>Message Staff</li>
+            <li>Grant Leave</li>
+        </ul>
+    </nav>
+    <nav th:if="${role==false}">
+        <ul>
+            <li><a>Lodge Complaint</a></li>
+            <li><a th:href="@{'/changePasswordForm/'+ ${loggerUser.getStaffId()}}">Change Password</a></li>
+            <li><a>Request For Leave</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
